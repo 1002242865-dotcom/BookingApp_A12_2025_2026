@@ -1,0 +1,29 @@
+﻿@{
+    List<Student> students = ViewBag.students;
+    Console.WriteLine(students.Count);
+}
+
+
+<div class="container">
+    <div class="row g-3">
+       @foreach( var st in students)
+        {
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/@st.Sora" class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@st.Name</h5>
+                        <p class="card-text">the ID is: @st.Id</p>
+                        <a href="#" class="btn btn-primary">Grades Report</a>
+                    </div>
+                </div>
+            </div>
+        }
+        
+    </div>
+    
+
+    
+</div>
+
+
