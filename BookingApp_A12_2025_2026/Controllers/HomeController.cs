@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
-using BookingApp_A12_2025_2026.Models;
+﻿using BookingApp_A12_2025_2026.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.OleDb;
+using System.Diagnostics;
 
 namespace BookingApp_A12_2025_2026.Controllers
 {
@@ -15,12 +16,15 @@ namespace BookingApp_A12_2025_2026.Controllers
 
         public async Task<IActionResult> Index()
         {
+            //Connector cn = new Connector("AppData/BookingDB.accdb");
+            //int x = cn.RunScalar("select count(*) from Cities");
+            //OleDbDataReader od=cn.RunSelect("select * from Cities");
             ////
             var gemini = new GeminiService();
             List<Student> students = Student.GetDemoStudents();
             var listText = string.Join("\n- ", students);
             var prompt = $"هذه قائمة طلاب:\n- {listText}\n\nهل يمكنك ترتيبهم أبجدياً حسب الاسم وعرضهم في جدول؟";
-           prompt = "write short story in arabic for 4th class";
+            //prompt = "write short story in arabic for 4th class";
             //prompt = "just the final outpot int x=10; int y=9; c.wl(x*y);";
             //prompt = "just the final number: كم كالوري في ساندويش فلافل";
             //prompt = "just the final number: كم كالوري في صحن كبير من مقلوبة فلسطينية";
@@ -39,12 +43,12 @@ namespace BookingApp_A12_2025_2026.Controllers
             {
                 Id = 100,
                 Name = "Omar",
-                Sora="Photos/st11.png"
+                Sora = "Photos/st11.png"
             };
 
             ViewBag.st1 = st1;
 
-              return View();
+            return View();
         }
 
         public IActionResult Privacy()

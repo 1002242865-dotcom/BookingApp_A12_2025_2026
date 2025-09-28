@@ -1,9 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\Data\**" />
+    <Content Remove="wwwroot\Data\**" />
+    <EmbeddedResource Remove="wwwroot\Data\**" />
+    <None Remove="wwwroot\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="AppData\BookingDB.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.OleDb" Version="9.0.9" />
+  </ItemGroup>
 
 </Project>

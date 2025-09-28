@@ -9,7 +9,7 @@
 
         public override string ToString()
         {
-            return "ID:"+Id+", Name:"+Name;
+            return "ID:" + Id + ", Name:" + Name;
         }
 
         public static List<Student> GetDemoStudents()
