@@ -90,6 +90,17 @@ namespace BookingApp_A12_2025_2026.Controllers
             return View("ManageCities");
         }
 
+        public async Task<IActionResult> CityDetailsAsync(int City_Id)
+        {
+            City ct = City.GetCityById(City_Id);
+            ViewBag.ct = ct;
+            var gemini = new GeminiService();
+            string prompt = "give details about 100 words in arabic about this city " + ct.City_Name;
+            var result = await gemini.AskAsync(prompt);
+            ViewBag.Response = result;
+            return View();
+        }
+
 
         public IActionResult Index1()
         {
