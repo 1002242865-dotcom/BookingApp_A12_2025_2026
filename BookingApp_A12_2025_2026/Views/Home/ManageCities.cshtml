@@ -8,6 +8,7 @@
         <th>Description</th>
         <th>Image</th>
         <th>Delete</th>
+        <th>Details</th>
     </tr>
     @foreach (var ct in cities)
     {
@@ -23,6 +24,12 @@
                 asp-route-City_Id="@ct.City_Id"
                    onclick="return confirm('هل أنت متأكد أنك تريد حذف هذه المدينة:@ct.City_Name؟');">حذف</a>
         </td>
+            <td>
+                <a class="btn btn-info"
+                   asp-controller="Home"
+                   asp-action="CityDetails"
+                   asp-route-City_Id="@ct.City_Id">معلومات</a>
+            </td>
       </tr>  
     }
 </table>
