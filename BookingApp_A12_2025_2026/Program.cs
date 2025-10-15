@@ -28,7 +28,7 @@ namespace BookingApp_A12_2025_2026
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=ManageCities}/{id?}");
 
             app.Run();
         }

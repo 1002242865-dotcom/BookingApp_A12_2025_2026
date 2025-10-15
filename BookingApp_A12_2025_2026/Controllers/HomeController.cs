@@ -18,18 +18,21 @@ namespace BookingApp_A12_2025_2026.Controllers
         {
             //Connector cn = new Connector("AppData/BookingDB.accdb");
             //int x = cn.RunScalar("select count(*) from Cities");
-            //OleDbDataReader od=cn.RunSelect("select * from Cities");
+            //OleDbDataReader od = cn.RunSelect("select * from Cities");
             ////
             var gemini = new GeminiService();
             List<Student> students = Student.GetDemoStudents();
             var listText = string.Join("\n- ", students);
             var prompt = $"هذه قائمة طلاب:\n- {listText}\n\nهل يمكنك ترتيبهم أبجدياً حسب الاسم وعرضهم في جدول؟";
             //prompt = "write short story in arabic for 4th class";
-            //prompt = "just the final outpot int x=10; int y=9; c.wl(x*y);";
+            //prompt = "just the final output int x=10; int y=9; c.wl(x*y);";
             //prompt = "just the final number: كم كالوري في ساندويش فلافل";
             //prompt = "just the final number: كم كالوري في صحن كبير من مقلوبة فلسطينية";
             //prompt = "show just the final number of calories: كم كالوري في باجيت متوسط مع 250 غرام شوراما";
             //prompt = "no details' just show th final amount of calories: شربت كاس نسكافيه مكون من 200 ملم حليب وملعقتين نس وملعقة عسل صغيرة";
+            //prompt = "in arabic: ماهي فؤائد اكلة المسخن الفلسطيني";
+            //prompt = "أكتب باللغة العربية وبدون مقدمات: نصيحة ذهبية للطلاب";
+            prompt = "أكتب باللغة العربية وبدون مقدمات: بيت شعر مشهور";
 
 
 
@@ -37,7 +40,7 @@ namespace BookingApp_A12_2025_2026.Controllers
 
             ViewBag.Prompt = prompt;
             ViewBag.Response = result;
-            ////
+            //
 
             Student st1 = new Student
             {
@@ -48,6 +51,11 @@ namespace BookingApp_A12_2025_2026.Controllers
 
             ViewBag.st1 = st1;
 
+
+
+
+            int t = City.GetTotalCities();
+            ViewBag.t = t;
             return View();
         }
 
@@ -56,16 +64,46 @@ namespace BookingApp_A12_2025_2026.Controllers
             return View();
         }
 
-        public IActionResult Index1()
+        public IActionResult ShowCities()
         {
+            ////Call the GetAllCity Method from the City Model
+            List<City> cities = City.GetAllCitiesFromDB();
+            //then send the List via ViewBag
+            ViewBag.cities = cities;
             return View();
         }
 
+        public IActionResult ManageCities()
+        {
+            List<City> cities = City.GetAllCitiesFromDB();
+            ViewBag.cities = cities;
+            return View();
+        }
+
+        public IActionResult DeleteCity(int City_Id)
+        {
+            int x = City.DeleteCityById(City_Id);
+            //حسب قيمة x 
+            //نقرر كيف والى اين نكمل
+            List<City> cities = City.GetAllCitiesFromDB();
+            ViewBag.cities = cities;
+            return View("ManageCities");
+        }
+
+
+        public IActionResult Index1()
+        {
+            int t = City.GetTotalCities();
+            ViewBag.t = t;
+            return View();
+        }
         public IActionResult ShowStudents()
         {
 
-            List<Student> students = Student.GetDemoStudents();
-            ViewBag.students = students;
+            List<Student> lst1 = Student.GetDemoStudents();
+            //ViewData["students"] = students;
+
+            ViewBag.lst1 = lst1;
             return View();
         }
 

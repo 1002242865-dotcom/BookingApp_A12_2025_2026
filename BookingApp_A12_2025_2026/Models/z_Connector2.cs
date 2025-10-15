@@ -3,12 +3,12 @@ using System.Data.OleDb;
 
 namespace BookingApp_A12_2025_2026.Data
 {
-    public class Connector2
+    public class z_Connector2
     {
         private readonly string _connectionString;
         public string LastError { get; private set; }
 
-        public Connector2(string dbFilePath)
+        public z_Connector2(string dbFilePath)
         {
             _connectionString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbFilePath}";
         }
