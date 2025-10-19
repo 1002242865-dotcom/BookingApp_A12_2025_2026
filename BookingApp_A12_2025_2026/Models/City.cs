@@ -105,6 +105,41 @@ namespace BookingApp_A12_2025_2026.Models
         }
 
 
+
+        public static City GetCityById(int City_Id)
+        {
+            City ct = null;
+           string sql= "select * from Cities where City_Id=" + City_Id;
+            Connector cn= new Connector(Configs.DataBaseLocation);
+            OleDbDataReader result= cn.RunSelect(sql);
+            if (result == null)
+            {
+                //City.MyError = cn.GetError();
+                return null;
+            }
+            while (result.Read())
+            {
+                ct = new City
+                {
+                    City_Id = int.Parse(result["city_Id"].ToString())
+                    ,
+                    City_Name = result["City_Name"].ToString()
+                    ,
+                    City_Photo = result["City_Photo"].ToString()
+                    ,
+                    City_Video = result["City_Video"].ToString()
+                    ,
+                    City_Description = result["City_Description"].ToString()
+                    ,
+                    City_Location = result["City_Location"].ToString()
+                    ,
+                    City_IsSafe = bool.Parse(result["City_IsSafe"].ToString())
+                };
+            }
+
+            return ct;
+        }
+
     }
 
 
