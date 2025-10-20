@@ -114,7 +114,6 @@ namespace BookingApp_A12_2025_2026.Models
             OleDbDataReader result= cn.RunSelect(sql);
             if (result == null)
             {
-                //City.MyError = cn.GetError();
                 return null;
             }
             while (result.Read())
@@ -136,10 +135,8 @@ namespace BookingApp_A12_2025_2026.Models
                     City_IsSafe = bool.Parse(result["City_IsSafe"].ToString())
                 };
             }
-
             return ct;
         }
-
     }
 
 
