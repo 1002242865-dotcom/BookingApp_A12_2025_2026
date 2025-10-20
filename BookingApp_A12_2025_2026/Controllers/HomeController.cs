@@ -83,6 +83,12 @@ namespace BookingApp_A12_2025_2026.Controllers
         public IActionResult DeleteCity(int City_Id)
         {
             int x = City.DeleteCityById(City_Id);
+            if (x == -1)
+                ViewBag.msg = "حدث خطأ أثناء الحذف، الرجاء المحاولة لاحقاً";
+            else if (x == 0)
+                ViewBag.msg = "لم يتم حذف اي سجل";
+            else
+                ViewBag.msg = "تم حذف " + x + " سجلات بنجاح";
             //حسب قيمة x 
             //نقرر كيف والى اين نكمل
             List<City> cities = City.GetAllCitiesFromDB();
