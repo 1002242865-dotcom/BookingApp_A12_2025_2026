@@ -75,6 +75,18 @@ namespace BookingApp_A12_2025_2026.Controllers
 
         public IActionResult ManageCities()
         {
+            //City ct = new City
+            //{
+            //    City_Name = "Test",
+            //    City_Location = "11111",
+            //    City_Photo = "7483748",
+            //    City_Description = "Test Desc",
+            //    City_Video = "47387483",
+            //    City_IsSafe = true,
+            //};
+            //int x = City.AddCityToDB(ct);
+
+
             List<City> cities = City.GetAllCitiesFromDB();
             ViewBag.cities = cities;
             return View();
@@ -136,10 +148,57 @@ namespace BookingApp_A12_2025_2026.Controllers
             return View();
         }
 
+
+        public IActionResult DoAddNewCity2(City ct)
+        {
+            int x = City.AddCityToDB(ct);
+            if(x>0)
+                ViewBag.msg = "تمت إضافة المدينة بنجاح";
+            else
+                ViewBag.msg = "حدث خطأ أثناء الإضافة، الرجاء المحاولة لاحقاً";
+            List<City> cities = City.GetAllCitiesFromDB();
+            ViewBag.cities = cities;
+            return View("ManageCities");
+        }
+
+        public IActionResult DoAddNewCity(City ct,IFormFile City_Photo_File)
+        {
+            //if admin seletced file
+            if (City_Photo_File != null)
+            {
+                Task<string> tmp = UploadFile(City_Photo_File, "Photos");
+                ct.City_Photo = "Photos/"+tmp.Result;
+            }
+           int x= City.AddCityToDB(ct);
+            List<City> cities = City.GetAllCitiesFromDB();
+            ViewBag.cities = cities;
+            return View("ManageCities");
+           // return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+
+        private async Task<string> UploadFile(IFormFile f1, string folder)
+        {
+
+            //Where to Save File and change file name
+            var baseFolder = "wwwroot";
+            var newFileName = DateTime.Now.Ticks.ToString() + "_" + f1.FileName;
+            var filePath = baseFolder + "/" + folder + "/" + newFileName;
+
+            ///stream is good for large files size
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                //async meaning in other thread
+                await f1.CopyToAsync(stream);
+            }
+            return newFileName;
         }
     }
 }

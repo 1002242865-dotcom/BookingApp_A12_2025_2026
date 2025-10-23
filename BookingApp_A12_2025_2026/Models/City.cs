@@ -9,7 +9,11 @@ namespace BookingApp_A12_2025_2026.Models
         //اسم المدينة
         public string City_Name { get; set; }
         //مثلا القدس: lat: 31.7683, lng: 35.2137
-        public string City_Location { get; set; }
+
+        public double City_Lat { get; set; }
+
+        public double City_Lng { get; set; }
+
         //عنوان صورة للمدينة
         public string City_Photo { get; set; }
         //عنوان فيديو يوتيوب..يكفي قيمة v
@@ -33,9 +37,10 @@ namespace BookingApp_A12_2025_2026.Models
 
         public static List<City> GetAllCitiesFromDB()
         {
-            List<City> cities = new List<City>();
-            Connector cn=new Connector(Configs.DataBaseLocation);
+            
             string sql = "select * from Cities";
+            List<City> cities = new List<City>();
+            Connector cn = new Connector(Configs.DataBaseLocation);
             OleDbDataReader result=cn.RunSelect(sql);
             if (result == null)
                 return null;
@@ -47,7 +52,8 @@ namespace BookingApp_A12_2025_2026.Models
                     ,City_Name = result["City_Name"].ToString()
                     ,City_IsSafe= bool.Parse(result["City_IsSafe"].ToString())
                     ,City_Description= result["City_Description"].ToString()
-                    ,City_Location= result["City_Location"].ToString()
+                    ,City_Lat= double.Parse(result["City_Lat"].ToString())
+                    ,City_Lng = double.Parse(result["City_Lng"].ToString())
                     ,City_Photo= result["City_Photo"].ToString()
                     ,City_Video = result["City_Video"].ToString()
                 };
@@ -57,43 +63,7 @@ namespace BookingApp_A12_2025_2026.Models
             return cities;
         }
 
-        public static List<City> GetAllCities()
-        {
-            List<City> cities = new List<City>();
-            //read from database
-            Connector cn = new Connector(Configs.DataBaseLocation);
-            string sql = "select * from Cities";
-            OleDbDataReader result = cn.RunSelect(sql); /// matrix כאילו مصفوفة ثنائية
-            if (result == null)
-            {
-                //City.MyError = cn.GetError();
-                return null;
-            }
-            while (result.Read())
-            {
-                City c1 = new City
-                {
-                    City_Id = int.Parse(result["city_Id"].ToString())
-                    ,
-                    City_Name = result["City_Name"].ToString()
-                    ,
-                    City_Photo = result["City_Photo"].ToString()
-                    ,
-                    City_Video = result["City_Video"].ToString()
-                    ,
-                    City_Description = result["City_Description"].ToString()
-                    ,
-                    City_Location = result["City_Location"].ToString()
-                    ,
-                    City_IsSafe = bool.Parse(result["City_IsSafe"].ToString())
-                 };
-
-                cities.Add(c1);
-
-            }
-            cn.CloseConnection(); ///Must Close
-            return cities;
-        }
+       
 
         public static int DeleteCityById(int City_Id)
         {
@@ -130,13 +100,72 @@ namespace BookingApp_A12_2025_2026.Models
                     ,
                     City_Description = result["City_Description"].ToString()
                     ,
-                    City_Location = result["City_Location"].ToString()
+                    City_Lat = double.Parse(result["City_Lat"].ToString())
+                    ,
+                    City_Lng = double.Parse(result["City_Lng"].ToString())
                     ,
                     City_IsSafe = bool.Parse(result["City_IsSafe"].ToString())
                 };
             }
             return ct;
         }
+
+        public static int AddCityToDB(City ct)
+        {
+            string sql = "INSERT INTO Cities (City_Name,City_Lat,City_Lng,City_Photo,City_Video,";
+            sql += "City_IsSafe,City_Description) ";
+            sql += " VALUES (";
+            sql += "'"+ct.City_Name+"'";
+            sql += ",'" + ct.City_Lat + "'";
+            sql += ",'" + ct.City_Lng + "'";
+            sql += ",'" + ct.City_Photo + "'";
+            sql += ",'" + ct.City_Video + "'";
+            sql += "," + ct.City_IsSafe + "";
+            sql += ",'" + ct.City_Description + "'";
+            sql += ")";
+          
+            Connector cn= new Connector(Configs.DataBaseLocation);
+            int x= cn.RunUpdateInsertDelete(sql);
+            return x;
+        }
+
+
+        public static List<City> SearchCitiesByName(string name)
+        {
+
+            string sql = "select * from Cities WHERE City_Name LIKE %%";
+            List<City> cities = new List<City>();
+            Connector cn = new Connector(Configs.DataBaseLocation);
+            OleDbDataReader result = cn.RunSelect(sql);
+            if (result == null)
+                return null;
+            while (result.Read())
+            {
+                City c1 = new City
+                {
+                    City_Id = int.Parse(result["City_Id"].ToString())
+                    ,
+                    City_Name = result["City_Name"].ToString()
+                    ,
+                    City_IsSafe = bool.Parse(result["City_IsSafe"].ToString())
+                    ,
+                    City_Description = result["City_Description"].ToString()
+                    ,
+                    City_Lat = double.Parse(result["City_Lat"].ToString())
+                    ,
+                    City_Lng = double.Parse(result["City_Lng"].ToString())
+                    ,
+                    City_Photo = result["City_Photo"].ToString()
+                    ,
+                    City_Video = result["City_Video"].ToString()
+                };
+                cities.Add(c1);
+            }
+            cn.CloseConnection();
+            return cities;
+        }
+
+
     }
 
 
