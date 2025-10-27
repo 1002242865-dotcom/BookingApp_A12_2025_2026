@@ -28,34 +28,41 @@ namespace BookingApp_A12_2025_2026.Models
             string sql = "select اسم_الدالة_التجميعية(* او اسم العمود) from اسم_الجدول";
             //ارتبط بقاعدة البيانات واحضر العدد الكلي للمدن
             Connector cn = new Connector(Configs.DataBaseLocation);
-            int total= cn.RunScalar("SELECT COUNT(*) from Cities");
+            int total = cn.RunScalar("SELECT COUNT(*) from Cities");
             return total;
 
-            
+
         }
 
 
         public static List<City> GetAllCitiesFromDB()
         {
-            
+
             string sql = "select * from Cities";
             List<City> cities = new List<City>();
             Connector cn = new Connector(Configs.DataBaseLocation);
-            OleDbDataReader result=cn.RunSelect(sql);
+            OleDbDataReader result = cn.RunSelect(sql);
             if (result == null)
                 return null;
-            while(result.Read())
+            while (result.Read())
             {
                 City c1 = new City
                 {
                     City_Id = int.Parse(result["City_Id"].ToString())
-                    ,City_Name = result["City_Name"].ToString()
-                    ,City_IsSafe= bool.Parse(result["City_IsSafe"].ToString())
-                    ,City_Description= result["City_Description"].ToString()
-                    ,City_Lat= double.Parse(result["City_Lat"].ToString())
-                    ,City_Lng = double.Parse(result["City_Lng"].ToString())
-                    ,City_Photo= result["City_Photo"].ToString()
-                    ,City_Video = result["City_Video"].ToString()
+                    ,
+                    City_Name = result["City_Name"].ToString()
+                    ,
+                    City_IsSafe = bool.Parse(result["City_IsSafe"].ToString())
+                    ,
+                    City_Description = result["City_Description"].ToString()
+                    ,
+                    City_Lat = double.Parse(result["City_Lat"].ToString())
+                    ,
+                    City_Lng = double.Parse(result["City_Lng"].ToString())
+                    ,
+                    City_Photo = result["City_Photo"].ToString()
+                    ,
+                    City_Video = result["City_Video"].ToString()
                 };
                 cities.Add(c1);
             }
@@ -63,12 +70,12 @@ namespace BookingApp_A12_2025_2026.Models
             return cities;
         }
 
-       
+
 
         public static int DeleteCityById(int City_Id)
         {
-            string sql = "delete from Cities where City_Id="+City_Id;
-            Connector cn=new Connector(Configs.DataBaseLocation);
+            string sql = "delete from Cities where City_Id=" + City_Id;
+            Connector cn = new Connector(Configs.DataBaseLocation);
             int x = cn.RunUpdateInsertDelete(sql);
             return x;
 
@@ -79,9 +86,9 @@ namespace BookingApp_A12_2025_2026.Models
         public static City GetCityById(int City_Id)
         {
             City ct = null;
-           string sql= "select * from Cities where City_Id=" + City_Id;
-            Connector cn= new Connector(Configs.DataBaseLocation);
-            OleDbDataReader result= cn.RunSelect(sql);
+            string sql = "select * from Cities where City_Id=" + City_Id;
+            Connector cn = new Connector(Configs.DataBaseLocation);
+            OleDbDataReader result = cn.RunSelect(sql);
             if (result == null)
             {
                 return null;
@@ -115,7 +122,7 @@ namespace BookingApp_A12_2025_2026.Models
             string sql = "INSERT INTO Cities (City_Name,City_Lat,City_Lng,City_Photo,City_Video,";
             sql += "City_IsSafe,City_Description) ";
             sql += " VALUES (";
-            sql += "'"+ct.City_Name+"'";
+            sql += "'" + ct.City_Name + "'";
             sql += ",'" + ct.City_Lat + "'";
             sql += ",'" + ct.City_Lng + "'";
             sql += ",'" + ct.City_Photo + "'";
@@ -123,9 +130,9 @@ namespace BookingApp_A12_2025_2026.Models
             sql += "," + ct.City_IsSafe + "";
             sql += ",'" + ct.City_Description + "'";
             sql += ")";
-          
-            Connector cn= new Connector(Configs.DataBaseLocation);
-            int x= cn.RunUpdateInsertDelete(sql);
+
+            Connector cn = new Connector(Configs.DataBaseLocation);
+            int x = cn.RunUpdateInsertDelete(sql);
             return x;
         }
 
@@ -166,7 +173,7 @@ namespace BookingApp_A12_2025_2026.Models
         }
 
 
-    }
 
+    }
 
 }
