@@ -14,7 +14,7 @@
 
 <table class="table table-striped">
     <tr>
-        <td colspan="6">
+        <td colspan="7">
             <a class="btn btn-primary"
                asp-controller="Home"
                asp-action="AddNewCityView">Add New City</a>
@@ -27,6 +27,7 @@
         <th>Description</th>
         <th>Image</th>
         <th>Delete</th>
+        <th>EDIT</th>
         <th>Details</th>
     </tr>
     @foreach (var ct in cities)
@@ -43,6 +44,12 @@
                 asp-route-City_Id="@ct.City_Id"
                    onclick="return confirm('هل أنت متأكد أنك تريد حذف هذه المدينة:@ct.City_Name؟');">حذف</a>
         </td>
+            <td>
+                <a class="btn btn-primary"
+                   asp-controller="Home"
+                   asp-action="CityUpdate"
+                   asp-route-City_Id="@ct.City_Id">تعديل</a>
+            </td>
             <td>
                 <a class="btn btn-info"
                    asp-controller="Home"

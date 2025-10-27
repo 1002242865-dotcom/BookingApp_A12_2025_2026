@@ -172,7 +172,24 @@ namespace BookingApp_A12_2025_2026.Models
             return cities;
         }
 
+        public static int UpdateCityInDB(City ct)
+        {
+            string sql = "UPDATE Cities SET ";
+            sql += "City_Name='" + ct.City_Name + "'";
+            sql += ",City_Lat=" + ct.City_Lat + "";
+            sql += ",City_Lng=" + ct.City_Lng + "";
+            sql += ",City_Photo='" + ct.City_Photo + "'";
+            sql += ",City_Video='" + ct.City_Video + "'";
+            sql += ",City_IsSafe=" + ct.City_IsSafe + "";
+            sql += ",City_Description='" + ct.City_Description + "'";
+            sql += " WHERE City_Id=" + ct.City_Id;
+            Connector cn=new Connector(Configs.DataBaseLocation);
+            int x= cn.RunUpdateInsertDelete(sql);
 
+
+
+            return x;
+        }
 
     }
 

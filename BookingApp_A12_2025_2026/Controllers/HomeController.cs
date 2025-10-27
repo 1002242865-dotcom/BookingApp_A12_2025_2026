@@ -163,13 +163,17 @@ namespace BookingApp_A12_2025_2026.Controllers
 
         public IActionResult DoAddNewCity(City ct,IFormFile City_Photo_File)
         {
-            //if admin seletced file
+            //if City Photo File Was seletced 
             if (City_Photo_File != null)
             {
                 Task<string> tmp = UploadFile(City_Photo_File, "Photos");
                 ct.City_Photo = "Photos/"+tmp.Result;
             }
            int x= City.AddCityToDB(ct);
+            if (x == -1)
+                ViewBag.msg = "حدث خطأ أثناء الاضافة، الرجاء المحاولة لاحقاً";
+            else
+                ViewBag.msg = "تم اضافة مدينة "+ct.City_Name+" بنجاح";
             List<City> cities = City.GetAllCitiesFromDB();
             ViewBag.cities = cities;
             return View("ManageCities");
@@ -182,6 +186,33 @@ namespace BookingApp_A12_2025_2026.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        
+        public IActionResult CityUpdate(int City_Id)
+        {
+
+            City ct= City.GetCityById(City_Id);
+            return View(ct);
+        }
+
+
+        public IActionResult DoUpdateExistedCity(City ct,IFormFile City_Photo_File)
+        {
+            //if City Photo File Was seletced 
+            if (City_Photo_File != null)
+            {
+                Task<string> tmp = UploadFile(City_Photo_File, "Photos");
+                ct.City_Photo = "Photos/" + tmp.Result;
+            }
+            int x = City.UpdateCityInDB(ct);
+            if (x == -1)
+                ViewBag.msg = "حدث خطأ أثناء التعديل، الرجاء المحاولة لاحقاً";
+            else
+                ViewBag.msg = "تم تعديل مدينة " + ct.City_Name + " بنجاح";
+
+            List<City> cities = City.GetAllCitiesFromDB();
+            ViewBag.cities = cities;
+            return View("ManageCities");
+        }
 
 
         private async Task<string> UploadFile(IFormFile f1, string folder)
