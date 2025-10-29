@@ -12,6 +12,8 @@ namespace BookingApp_A12_2025_2026.Controllers
 
         public IActionResult TestHotelMethods()
         {
+            string str = "skill1, skill2,skill3";
+            var skills = str.Split(',').Select(s => s.Trim()).ToList();
             //1 Test GetAllHotelsFromDB
             //List<Hotel> holtels = Hotel.GetAllHotelsFromDB();
 
@@ -43,10 +45,10 @@ namespace BookingApp_A12_2025_2026.Controllers
             //int y = Hotel.UpdateHotel(h2);
 
             //6 test GetAllHotelByCityId
-           // List<Hotel> hotelsInCity = Hotel.GetHotelsByCityId(2);
+            // List<Hotel> hotelsInCity = Hotel.GetHotelsByCityId(2);
 
             //7 test search by name and stars
-            List<Hotel> searchedHotels = Hotel.SearchByHotelNameAndStars("abr", 5);
+            //List<Hotel> searchedHotels = Hotel.SearchByHotelNameAndStars("abr", 5);
 
             return View();
         }   

@@ -16,6 +16,10 @@ namespace BookingApp_A12_2025_2026.Controllers
 
         public async Task<IActionResult> Index()
         {
+           
+
+
+
             //Connector cn = new Connector("AppData/BookingDB.accdb");
             //int x = cn.RunScalar("select count(*) from Cities");
             //OleDbDataReader od = cn.RunSelect("select * from Cities");
