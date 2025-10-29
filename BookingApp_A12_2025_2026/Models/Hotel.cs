@@ -160,9 +160,9 @@ namespace BookingApp_A12_2025_2026.Models
             return h1;
         }
 
-        public static List<Hotel> SearchByCityIdAndStars(string City_Name, int Hotel_Stars)
+        public static List<Hotel> SearchByHotelNameAndStars(string Hotel_Name, int Hotel_Stars)
         {
-            string sql = $"select * from Hotels where City_Name Like '%{City_Name}%' and Hotel_Stars={Hotel_Stars}";
+            string sql = $"select * from Hotels where Hotel_Name Like '%{Hotel_Name}%' and Hotel_Stars={Hotel_Stars}";
             List<Hotel> hotels = new List<Hotel>();
             Connector cn = new Connector(Configs.DataBaseLocation);
             OleDbDataReader result = cn.RunSelect(sql);

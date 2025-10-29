@@ -12,9 +12,11 @@ namespace BookingApp_A12_2025_2026.Controllers
 
         public IActionResult TestHotelMethods()
         {
+            //1 Test GetAllHotelsFromDB
             List<Hotel> holtels = Hotel.GetAllHotelsFromDB();
 
-            //Hotel h1=new Hotel
+            //////2 test GetHotelsByCityId
+            //Hotel h1 = new Hotel
             //{
             //    City_Id = 1,
             //    Hotel_Name = "Test Hotel",
@@ -29,9 +31,24 @@ namespace BookingApp_A12_2025_2026.Controllers
             //    Hotel_Password = "testpass",
             //    Hotel_Status = 1
             //};
+
+            //3 test AddNewHotel
             //int newHotelId = Hotel.AddNewHotel(h1);
 
-            int x = Hotel.DeleteHotelById(2);
+            //4 test DeleteHotelById
+            //int x = Hotel.DeleteHotelById(2);
+
+            //5 test UpdateHotel
+            //Hotel h2 = Hotel.GetHotelById(5);
+            //h2.Hotel_Name = "Updated Hotel Name";
+            //h2.Hotel_Description += DateTime.Now.ToLongTimeString();
+            //int y = Hotel.UpdateHotel(h2);
+
+            //6 test GetAllHotelByCityId
+            //List<Hotel> hotelsInCity = Hotel.GetHotelsByCityId(2);
+
+            //7 test search by name and stars
+            //List<Hotel> searchedHotels = Hotel.SearchByHotelNameAndStars("a", 5);
 
             return View();
         }   
