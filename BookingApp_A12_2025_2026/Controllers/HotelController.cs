@@ -13,13 +13,13 @@ namespace BookingApp_A12_2025_2026.Controllers
         public IActionResult TestHotelMethods()
         {
             //1 Test GetAllHotelsFromDB
-            List<Hotel> holtels = Hotel.GetAllHotelsFromDB();
+            //List<Hotel> holtels = Hotel.GetAllHotelsFromDB();
 
             //////2 test GetHotelsByCityId
             //Hotel h1 = new Hotel
             //{
             //    City_Id = 1,
-            //    Hotel_Name = "Test Hotel",
+            //    Hotel_Name = "A12 Test Hotel",
             //    Hotel_Stars = 4,
             //    Hotel_Photo = "test_photo.jpg",
             //    Hotel_Video = "test_video.mp4",
@@ -31,24 +31,22 @@ namespace BookingApp_A12_2025_2026.Controllers
             //    Hotel_Password = "testpass",
             //    Hotel_Status = 1
             //};
-
-            //3 test AddNewHotel
             //int newHotelId = Hotel.AddNewHotel(h1);
 
-            //4 test DeleteHotelById
-            //int x = Hotel.DeleteHotelById(2);
+            //3 test DeleteHotelById
+            //int x = Hotel.DeleteHotelById(15);
 
-            //5 test UpdateHotel
-            //Hotel h2 = Hotel.GetHotelById(5);
-            //h2.Hotel_Name = "Updated Hotel Name";
+            //4+5 test GetHotelById & UpdateHotel
+            //Hotel h2 = Hotel.GetHotelById(7);
+            //h2.Hotel_Name += " Updated Hotel Name";
             //h2.Hotel_Description += DateTime.Now.ToLongTimeString();
             //int y = Hotel.UpdateHotel(h2);
 
             //6 test GetAllHotelByCityId
-            //List<Hotel> hotelsInCity = Hotel.GetHotelsByCityId(2);
+           // List<Hotel> hotelsInCity = Hotel.GetHotelsByCityId(2);
 
             //7 test search by name and stars
-            //List<Hotel> searchedHotels = Hotel.SearchByHotelNameAndStars("a", 5);
+            List<Hotel> searchedHotels = Hotel.SearchByHotelNameAndStars("abr", 5);
 
             return View();
         }   
