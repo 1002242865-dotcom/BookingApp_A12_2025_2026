@@ -174,7 +174,7 @@ namespace BookingApp_A12_2025_2026.Models
 
         public static int UpdateCityInDB(City ct)
         {
-            string sql = "UPDATE City SET";
+            string sql = "UPDATE Cities SET";
             sql += "City_Name='" + ct.City_Name + "'";
             sql += ",City_Lat=" + ct.City_Lat + "";
             sql += ",City_Lng=" + ct.City_Lng + "";
