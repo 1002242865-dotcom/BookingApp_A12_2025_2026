@@ -1,0 +1,27 @@
+﻿@model BookingApp_A12_2025_2026.Models.Hotel
+    @{
+        ViewData["Title"] = "إضافة فندق جديد";
+    }
+
+    <form asp-action="DoAddNewHotel" asp-controller="Hotel" enctype="multipart/form-data">
+
+    <select asp-for="City_Id" 
+            asp-items="@(new SelectList(ViewBag.cities, "City_Id", "City_Name"))" required>
+    </select>
+
+   
+
+   @*  <select asp-for="City_Id">
+        @foreach (var city in ViewBag.cities)
+        {
+            <option value="@city.City_Id">@city.City_Name</option>
+        }
+
+    </select> *@
+
+
+    <input asp-for="Hotel_Name" class="form-control" placeholder="اسم الفندق" required />
+    <input asp-for="Hotel_Description" class="form-control" placeholder="وصف الفندق" required />
+    <input asp-for="Hotel_Photo" type="file" class="form-control" required />
+    <button type="submit" class="btn btn-primary">إضافة الفندق</button>
+    </form>

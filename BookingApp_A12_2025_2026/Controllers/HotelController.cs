@@ -1,5 +1,6 @@
 ﻿using BookingApp_A12_2025_2026.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BookingApp_A12_2025_2026.Controllers
 {
@@ -52,5 +53,25 @@ namespace BookingApp_A12_2025_2026.Controllers
 
             return View();
         }   
+
+        public IActionResult AddNewHotelView()
+        {
+            List<City> cities = City.GetAllCitiesFromDB();
+            ViewBag.cities = cities;
+            ViewBag.cities = City.GetAllCitiesFromDB();
+            
+            return View();
+        }
+
+        public IActionResult ManageHotels()
+        {
+            return View();
+        }
+
+        public IActionResult DoAddNewHotel(Hotel h1)
+        {
+            int x = Hotel.AddNewHotel(h1);
+            return View();
+        }
     }
 }

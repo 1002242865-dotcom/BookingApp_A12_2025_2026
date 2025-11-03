@@ -28,7 +28,7 @@ namespace BookingApp_A12_2025_2026
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Hotel}/{action=TestHotelMethods}/{id?}");
+                pattern: "{controller=Hotel}/{action=ManageHotels}/{id?}");
 
             app.Run();
         }
