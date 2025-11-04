@@ -1,4 +1,5 @@
-﻿@*
+﻿@model BookingApp_A12_2025_2026.Models.Subject
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -10,6 +11,21 @@
             <a class="btn btn-primary"
                asp-controller="Hotel"
                asp-action="AddNewHotelView">Add New Hotel</a>
+        </td>
+    </tr>
+
+    <tr>
+
+        <td>
+            <form  enctype="multipart/form-data">
+
+                <select @foreach (var sb in ViewBag.subjects)
+                    {
+                        <option value="@sb.Subject_Id">@sb.Subject_Name</option>
+                    }
+
+                </select> 
+    </form>
         </td>
     </tr>
 </table>

@@ -65,6 +65,12 @@ namespace BookingApp_A12_2025_2026.Controllers
 
         public IActionResult ManageHotels()
         {
+            List<UserType> userTypes = new UserType().GetAllFromDB();
+            ViewBag.userTypes = userTypes;
+
+
+            List<Subject> subjects = Subject.GetAllFromDB();
+            ViewBag.subjects = subjects;
             return View();
         }
 
